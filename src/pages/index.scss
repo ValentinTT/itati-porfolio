@@ -1,0 +1,72 @@
+$header-color: #fff;
+$nav-item-color: #fff;
+$nav-item-hover-color: #f00;
+$header-font-size: 3.5rem;
+$nav-item-font-size: 1.5rem;
+
+html {
+  overflow: hidden;
+}
+
+.wrapper {
+  height: 100vh;
+  display: grid;
+  user-select: none;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header" "sidebar";
+  background-color: #aaa;
+  // OPT 1
+  background-size: auto 100%;
+  background-repeat: repeat;
+}
+
+header {
+  grid-area: header;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  //Black box
+  padding-bottom: 1rem;
+  background-color: #111;
+  width: fit-content;
+  h1 {
+    margin: 0;
+    margin: 0 1rem;
+    margin-top: 1rem;
+    color: $header-color;
+    font-size: $header-font-size;
+  }
+}
+
+nav {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-right: 1rem;
+  .nav-item {
+    * {
+      font-size: $nav-item-font-size;
+      color: $nav-item-color;
+      transition: color 0.25s ease-in-out;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $nav-item-hover-color;
+        transform: scale(0);
+        transition: transform 0.25s;
+      }
+      &:hover {
+        color: $nav-item-color;
+        &::after {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

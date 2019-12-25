@@ -1,21 +1,59 @@
 import React from "react"
-import { Link } from "gatsby"
+import { StaticQuery, Link } from "gatsby"
+import BackgroundImage from "gatsby-background-image"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+import "./index.scss"
+
+const IndexPage = () => {
+  return (
+    <StaticQuery
+      query={graphql`
+        query {
+          desktop: file(relativePath: { eq: "home-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90, maxWidth: 4160) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      `}
+      render={data => {
+        // Set ImageData.
+        const imageData = data.desktop.childImageSharp.fluid
+        return (
+          <BackgroundImage
+            Tag="section"
+            className="wrapper"
+            fluid={imageData}
+            backgroundColor={`#040e18`}
+          >
+            <SEO title="Home" />
+            <header>
+              <h1>Itati</h1>
+              <h1>Tapia</h1>
+            </header>
+            <nav>
+              <div className="nav-item">
+                <Link to="/">Home</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/404">Photo Albums</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/404">Collections</Link>
+              </div>
+              <div className="nav-item">
+                <Link to="/404">Contact</Link>
+              </div>
+            </nav>
+          </BackgroundImage>
+        )
+      }}
+    />
+  )
+}
 
 export default IndexPage
