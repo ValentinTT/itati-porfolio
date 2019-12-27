@@ -1,8 +1,26 @@
 module.exports = {
   siteMetadata: {
-    title: `Itati's portfolio`,
+    title: `Itati Tapia`,
     description: `This is a porfolio where I will upload some of my best albums, plus some information about me, so you can get to know me better.`,
     author: `@gatsbyjs`,
+    menuLinks: [
+      {
+        name: `Home`,
+        link: `/`,
+      },
+      {
+        name: `Albums`,
+        link: `/albums`,
+      },
+      {
+        name: `Collections`,
+        link: `/collections`,
+      },
+      {
+        name: `Contact`,
+        link: `/contact`,
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

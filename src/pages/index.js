@@ -1,58 +1,75 @@
 import React from "react"
-import { StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery, Link } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
-
+import { createGlobalStyle } from "styled-components"
 import SEO from "../components/seo"
+import IndexStyles from "./index.module.scss"
 
-import "./index.scss"
+const GlobalStyle = createGlobalStyle`
+  html {
+    overflow: hidden;
+  }
+`
 
 const IndexPage = () => {
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          desktop: file(relativePath: { eq: "home-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90, maxWidth: 4160) {
-                ...GatsbyImageSharpFluid
+    <>
+      <GlobalStyle />
+      <StaticQuery
+        query={graphql`
+          query {
+            site {
+              siteMetadata {
+                title
+                menuLinks {
+                  name
+                  link
+                }
+              }
+            }
+            desktop: file(relativePath: { eq: "home-bg.jpg" }) {
+              childImageSharp {
+                fluid(quality: 90, maxWidth: 4160) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
-        }
-      `}
-      render={data => {
-        // Set ImageData.
-        const imageData = data.desktop.childImageSharp.fluid
-        return (
-          <BackgroundImage
-            Tag="section"
-            className="wrapper"
-            fluid={imageData}
-            backgroundColor={`#040e18`}
-          >
-            <SEO title="Home" />
-            <header>
-              <h1>Itati</h1>
-              <h1>Tapia</h1>
-            </header>
-            <nav>
-              <div className="nav-item">
-                <Link to="/">Home</Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/404">Photo Albums</Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/404">Collections</Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/404">Contact</Link>
-              </div>
-            </nav>
-          </BackgroundImage>
-        )
-      }}
-    />
+        `}
+        render={data => {
+          // Set ImageData.
+          const imageData = data.desktop.childImageSharp.fluid
+          const links = data.site.siteMetadata.menuLinks
+          return (
+            <BackgroundImage
+              Tag="section"
+              className={IndexStyles.wrapper}
+              fluid={imageData}
+              backgroundColor={`#040e18`}
+            >
+              <SEO title="Home" />
+              <header className={IndexStyles.header}>
+                {data.site.siteMetadata.title.split(" ").map(T => (
+                  <>
+                    <h1>{T}</h1>
+                    <br />
+                  </>
+                ))}
+              </header>
+              <nav className={IndexStyles.nav}>
+                {links.map(L => (
+                  <li className={IndexStyles.navItem} key={L.name}>
+                    <Link to={L.link} key={L.name}>
+                      {L.name}
+                    </Link>
+                  </li>
+                ))}
+              </nav>
+            </BackgroundImage>
+          )
+        }}
+      />
+    </>
   )
 }
 
