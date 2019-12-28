@@ -69,7 +69,7 @@ const NavBar = styled(animated.nav)`
   top: 0;
   left: 0;
   background: #2d3436;
-  z-index: 100;
+  z-index: 10;
   font-size: 1.4rem;
   user-select: none;
 `
@@ -82,6 +82,7 @@ const FlexContainer = styled.div`
   justify-content: space-between;
   height: 5rem;
 `
+//TODO: Remember to include the navbar height into the theme
 
 const NavTitle = styled.h1`
   margin: auto 0;
@@ -114,7 +115,6 @@ const NavLinks = styled(animated.ul)`
   }
   .active {
     color: #fdcb6e;
-    border-bottom: 1px solid #fdcb6e;
   }
 `
 

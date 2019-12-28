@@ -27,7 +27,7 @@ class NavbarContainer extends Component {
 export default NavbarContainer
 
 const Navbarcontainer = styled.div`
-  margin-bottom: 100px;
+  margin-bottom: 5rem;
 `
 
 const GlobalStyles = createGlobalStyle`
@@ -35,12 +35,13 @@ const GlobalStyles = createGlobalStyle`
   *,
   *::after,
   *::before {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: inherit;
   }
   html {
     font-size: 62.5%;
+    overflow: scroll;
   }
   body {
     box-sizing: border-box;

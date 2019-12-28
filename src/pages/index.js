@@ -5,12 +5,6 @@ import { createGlobalStyle } from "styled-components"
 import SEO from "../components/seo"
 import IndexStyles from "./index.module.scss"
 
-const GlobalStyle = createGlobalStyle`
-  html {
-    overflow: hidden;
-  }
-`
-
 const IndexPage = () => {
   return (
     <>
@@ -74,3 +68,9 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    overflow: hidden;
+  }
+`

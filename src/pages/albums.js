@@ -1,9 +1,8 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
-import SEO from "../components/seo"
-import NavbarContainer from "../components/navbar/NavbarContainer"
-import AlbumsStyles from "./albums.module.scss"
+import styled from "styled-components"
+import Layout from "../components/layout"
 
 const AlbumsPage = ({ data }) => {
   const allMarkdown = data.allMarkdownRemark.edges.map(n => ({
@@ -17,28 +16,74 @@ const AlbumsPage = ({ data }) => {
       ...obj,
     }
   })
-  console.log("All Covers: ", allCovers)
 
   return (
-    <div style={{ height: "400vh" }}>
-      <SEO title="Albums" />
-      <NavbarContainer />
-      <div className={AlbumsStyles.container}>
+    <Layout title="Albums">
+      <AlbumsContainer>
         {allCovers.map((cover, i) => (
-          <div key={i} className={AlbumsStyles.coverContainer}>
+          <Album key={i}>
             <Link to={`/albums/${cover.url}`}>
-              <Img
-                fluid={cover.childImageSharp.fluid}
-                className={AlbumsStyles.cover}
-              ></Img>
-              <div className={AlbumsStyles.title}>{cover.title}</div>
+              <AlbumCover fluid={cover.childImageSharp.fluid}></AlbumCover>
+              <AlbumTitle>{cover.title}</AlbumTitle>
             </Link>
-          </div>
+          </Album>
         ))}
-      </div>
-    </div>
+      </AlbumsContainer>
+    </Layout>
   )
 }
+
+const AlbumsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+const Album = styled.div`
+  background-color: #fff;
+  width: 300px;
+  margin: 1rem;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 5%;
+  position: relative;
+  box-shadow: 0px 10px 32px -10px rgba(0, 0, 0, 0.75);
+
+  &:hover > a {
+    & > p {
+      /* transform: translateY(70%); */
+      transform: scale(1.5);
+      opacity: 0.5;
+      color: #ffc14e;
+    }
+    & > div {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  }
+`
+
+const AlbumCover = styled(props => <Img {...props} />)`
+  width: 300px;
+  transition: opacity 0.25s;
+  transition: transform 1s ease-in-out;
+`
+
+const AlbumTitle = styled.p`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #222;
+  color: white;
+  text-align: center;
+  font-size: 1.75rem;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+`
 
 export const query = graphql`
   query {
@@ -47,7 +92,7 @@ export const query = graphql`
         node {
           relativeDirectory
           childImageSharp {
-            fluid(maxWidth: 300) {
+            fluid(maxWidth: 500) {
               ...GatsbyImageSharpFluid
             }
           }

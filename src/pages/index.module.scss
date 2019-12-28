@@ -43,6 +43,9 @@ $nav-item-font-size: 1.5rem;
   flex-direction: column;
   text-align: right;
   padding-right: 1rem;
+  li {
+    list-style-type: none;
+  }
   .nav-item {
     * {
       font-size: $nav-item-font-size;
