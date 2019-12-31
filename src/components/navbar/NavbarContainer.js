@@ -27,7 +27,7 @@ class NavbarContainer extends Component {
 export default NavbarContainer
 
 const Navbarcontainer = styled.div`
-  margin-bottom: 5rem;
+  margin-bottom: ${props => props.theme.spacing.navbar};
 `
 
 const GlobalStyles = createGlobalStyle`

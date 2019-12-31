@@ -55,13 +55,14 @@ const CollapseMenu = props => {
 export default CollapseMenu
 
 const CollapseWrapper = styled(animated.div)`
-  background: #2d3436;
+  background: ${props => props.theme.colors.surface};
   position: fixed;
   top: 4.5rem;
   left: 0;
   right: 0;
   z-index: 1;
   user-select: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `
 
 const NavLinks = styled.ul`
@@ -75,18 +76,18 @@ const NavLinks = styled.ul`
   & a {
     font-size: 1.4rem;
     line-height: 2;
-    color: #dfe6e9;
+    color: ${props => props.theme.colors.onSurface};
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: #fdcb6e;
-      border-bottom: 1px solid #fdcb6e;
+      color: ${props => props.theme.colors.primary};
+      border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
     }
   }
 
   .active {
-    color: #fdcb6e;
+    color: ${props => props.theme.colors.primary};
   }
 `

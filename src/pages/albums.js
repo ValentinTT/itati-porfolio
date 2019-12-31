@@ -43,7 +43,7 @@ const Album = styled.div`
   width: 300px;
   margin: 1rem;
   overflow: hidden;
-  border-radius: 5%;
+  /* border-radius: 5%; */
   position: relative;
   box-shadow: 0px 10px 32px -10px rgba(0, 0, 0, 0.75);
 
@@ -52,7 +52,7 @@ const Album = styled.div`
       /* transform: translateY(70%); */
       transform: scale(1.5);
       opacity: 0.5;
-      color: #ffc14e;
+      color: ${props => props.theme.colors.primary};
     }
     & > div {
       transform: scale(1.1);
@@ -63,8 +63,7 @@ const Album = styled.div`
 
 const AlbumCover = styled(props => <Img {...props} />)`
   height: 300px;
-  transition: opacity 0.25s;
-  transition: transform 1s ease-in-out;
+  transition: all 0.25s ease-in-out;
 `
 
 const AlbumTitle = styled.p`

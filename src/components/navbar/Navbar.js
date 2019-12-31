@@ -68,10 +68,11 @@ const NavBar = styled(animated.nav)`
   width: 100%;
   top: 0;
   left: 0;
-  background: #2d3436;
+  background: ${props => props.theme.colors.surface};
   z-index: 10;
   font-size: 1.4rem;
   user-select: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `
 
 const FlexContainer = styled.div`
@@ -80,13 +81,13 @@ const FlexContainer = styled.div`
   margin: auto;
   padding: 0 2rem;
   justify-content: space-between;
-  height: 5rem;
+  height: ${props => props.theme.spacing.navbar};
 `
 //TODO: Remember to include the navbar height into the theme
 
 const NavTitle = styled.h1`
   margin: auto 0;
-  color: #fff;
+  color: ${props => props.theme.colors.onSurface};
 `
 
 const NavLinks = styled(animated.ul)`
@@ -95,7 +96,7 @@ const NavLinks = styled(animated.ul)`
   margin: auto 0;
 
   & a {
-    color: #dfe6e9;
+    color: ${props => props.theme.colors.onSurface};
     text-transform: uppercase;
     font-weight: 600;
     border-bottom: 1px solid transparent;
@@ -105,8 +106,8 @@ const NavLinks = styled(animated.ul)`
     cursor: pointer;
 
     &:hover {
-      color: #fdcb6e;
-      border-bottom: 1px solid #fdcb6e;
+      color: ${props => props.theme.colors.primary};
+      border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
     }
 
     @media (max-width: 768px) {
@@ -114,8 +115,8 @@ const NavLinks = styled(animated.ul)`
     }
   }
   .active {
-    color: #fdcb6e;
-    border-bottom: 1px solid #fdcb6e;
+    color: ${props => props.theme.colors.primary};
+    border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
   }
 `
 

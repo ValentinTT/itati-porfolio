@@ -1,20 +1,16 @@
 @mixin social-color($color) {
   &::before {
-    background-color: $color; //#3b5998;
+    background-color: $color;
   }
 
   & > * {
-    color: $color; //#3b5998;
+    color: $color;
   }
 
   & > *:before {
-    background-color: $color; //#3b5998;
+    background-color: $color;
   }
 }
-
-// .facebook {
-//   @include social-color(#3b5998);
-// }
 
 .instagram {
   @include social-color(#e1306c);

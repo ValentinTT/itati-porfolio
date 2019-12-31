@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   user-select: none;
 
   & span {
-    background: #fdcb6e;
+    background: ${props => props.theme.colors.primary};
     display: block;
     position: relative;
     width: 3.5rem;

@@ -3,10 +3,11 @@ import PropTypes from "prop-types"
 import styled, { createGlobalStyle } from "styled-components"
 import SEO from "./seo"
 import NavbarContainer from "./navbar/NavbarContainer"
+import Theme from "../Theme"
 
 const Layout = ({ children, title }) => {
   return (
-    <>
+    <Theme>
       <GlobalStyles />
       <SEO title={title} />
       <Container>
@@ -17,7 +18,7 @@ const Layout = ({ children, title }) => {
           <span style={{ marginLeft: "0.5rem" }}>Itati Tapia</span>
         </Footer>
       </Container>
-    </>
+    </Theme>
   )
 }
 
@@ -49,12 +50,12 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #d5d6d6;
+  background-color: ${props => props.theme.colors.background};
 `
 
 const Main = styled.main`
   flex-grow: 1;
-  background-color: #d5d6d6;
+  background-color: ${props => props.theme.colors.background};
   margin: 0 0;
   padding: 2rem;
   display: flex;
@@ -62,11 +63,12 @@ const Main = styled.main`
   justify-content: center;
 `
 const Footer = styled.footer`
-  background-color: #2d3436;
+  background-color: ${props => props.theme.colors.surface};
   display: flex;
   justify-content: center;
-  color: #fff;
+  color: ${props => props.theme.colors.onSurface};
   font-size: 1.2rem;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.19), 0 -3px 3px rgba(0, 0, 0, 0.23);
 `
 
 Layout.propTypes = {

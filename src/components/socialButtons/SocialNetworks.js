@@ -1,14 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInstagram, faPinterest } from "@fortawesome/free-brands-svg-icons"
-import { faAt } from "@fortawesome/free-solid-svg-icons"
-
+import { faInstagram } from "@fortawesome/free-brands-svg-icons"
 import SocialStyles from "./socialStyles.module.scss"
+import Title from "../Title"
 
 const SocialNetworks = () => (
   <Container>
-    <MeidaTitle>My Social Networks</MeidaTitle>
+    <Title>Follow me on Instagram</Title>
     <ButtonsContainer>
       <SocialButton
         href="https://www.instagram.com/itati_tapia/"
@@ -24,16 +23,15 @@ const SocialNetworks = () => (
 
 export default SocialNetworks
 
-const MeidaTitle = styled.h1`
-  color: #2d3436;
-  font-size: 2.5rem;
-  text-align: center;
-`
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  height: fit-content;
+  background: ${props => props.theme.colors.surface};
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin: ${props => "0 " + props.theme.spacing.medium};
 `
 
 const ButtonsContainer = styled.div`
@@ -43,7 +41,7 @@ const ButtonsContainer = styled.div`
 
 const SocialButton = styled.a`
   display: inline-block;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.surface};
   width: 50px;
   height: 50px;
   line-height: 50px;
@@ -55,7 +53,7 @@ const SocialButton = styled.a`
   overflow: hidden;
   opacity: 0.99;
   border-radius: 50%;
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
   transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
 
@@ -83,7 +81,7 @@ const SocialButton = styled.a`
   }
 
   &:hover > * {
-    color: #fff;
+    color: ${props => props.theme.colors.surface};
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);

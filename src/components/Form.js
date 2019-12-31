@@ -1,10 +1,11 @@
 import React from "react"
 import styled from "styled-components"
+import Title from "./Title"
 
 const Form = () => (
   <FormContainer>
     <MyForm action="post">
-      <FormTitle>Send me an email</FormTitle>
+      <Title>Send me an email</Title>
       <Input type="text" placeholder="Your name" />
       <Input type="email" placeholder="email@address.com" />
       <MessageInput placeholder="Your message..."></MessageInput>
@@ -20,7 +21,11 @@ export default Form
 const FormContainer = styled.div`
   grid-area: form;
   width: 100%;
-  height: 100%;
+  height: fit-content;
+  background: ${props => props.theme.colors.surface};
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin: ${props => "0 " + props.theme.spacing.medium};
 `
 const MyForm = styled.form`
   width: 100%;
@@ -28,14 +33,8 @@ const MyForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #d5d6d6;
+  background-color: ${props => props.theme.colors.background};
   padding: 1rem;
-`
-
-const FormTitle = styled.h1`
-  color: #2d3436;
-  font-size: 2.5rem;
-  text-align: center;
 `
 
 const Input = styled.input.attrs({
@@ -48,8 +47,8 @@ const Input = styled.input.attrs({
   border-radius: 5px;
   border: 0;
   border: 1px transparent solid;
-  border-bottom: 1px #ffc14e solid;
-  color: #2d3436;
+  border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
+  color: ${props => props.theme.colors.onBackground};
   font-size: 1.25rem;
   background-color: #fff;
   transition: all 0.1s linear;
@@ -60,7 +59,7 @@ const Input = styled.input.attrs({
     background-color: #fff;
   }
   &:focus {
-    border: 1px #ffc14e solid;
+    border: ${props => `1px solid ${props.theme.colors.primary}`};
   }
 `
 
@@ -74,7 +73,7 @@ const MessageInput = styled.textarea`
   border-radius: 5px;
   border: 0;
   border: 1px transparent solid;
-  border-bottom: 1px #ffc14e solid;
+  border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
   color: #2d3436;
   font-size: 1.25rem;
   background-color: #fff;
@@ -85,7 +84,7 @@ const MessageInput = styled.textarea`
     background-color: #fff;
   }
   &:focus {
-    border: 1px #ffc14e solid;
+    border: ${props => `1px solid ${props.theme.colors.primary}`};
   }
 `
 
@@ -97,13 +96,13 @@ const Row = styled.div`
 
 const FormButton = styled.button`
   padding: 1rem;
-  background-color: #2d3436;
+  background-color: ${props => props.theme.colors.primary};
   border: none;
   font-size: 1.4rem;
-  color: #fff;
+  color: ${props => props.theme.colors.onPrimary};
   font-weight: 600;
   transition: all 0.25s linear;
-  box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
   &:active {
     box-shadow: none;
@@ -116,6 +115,5 @@ const FormButton = styled.button`
   }
   &:hover {
     opacity: 0.8;
-    color: #ffc14e;
   }
 `

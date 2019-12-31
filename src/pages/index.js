@@ -1,13 +1,13 @@
 import React from "react"
 import { graphql, StaticQuery, Link } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import SEO from "../components/seo"
-import IndexStyles from "./index.module.scss"
+import Theme from "../Theme"
 
 const IndexPage = () => {
   return (
-    <>
+    <Theme>
       <GlobalStyle />
       <StaticQuery
         query={graphql`
@@ -35,35 +35,34 @@ const IndexPage = () => {
           const imageData = data.desktop.childImageSharp.fluid
           const links = data.site.siteMetadata.menuLinks
           return (
-            <BackgroundImage
+            <Background
               Tag="section"
-              className={IndexStyles.wrapper}
               fluid={imageData}
               backgroundColor={`#040e18`}
             >
               <SEO title="Home" />
-              <header className={IndexStyles.header}>
+              <Header>
                 {data.site.siteMetadata.title.split(" ").map(T => (
                   <>
                     <h1>{T}</h1>
                     <br />
                   </>
                 ))}
-              </header>
-              <nav className={IndexStyles.nav}>
+              </Header>
+              <Nav>
                 {links.map(L => (
-                  <li className={IndexStyles.navItem} key={L.name}>
+                  <NavItem key={L.name}>
                     <Link to={L.link} key={L.name}>
                       {L.name}
                     </Link>
-                  </li>
+                  </NavItem>
                 ))}
-              </nav>
-            </BackgroundImage>
+              </Nav>
+            </Background>
           )
         }}
       />
-    </>
+    </Theme>
   )
 }
 
@@ -72,5 +71,72 @@ export default IndexPage
 const GlobalStyle = createGlobalStyle`
   html {
     overflow: hidden;
+  }
+`
+const Background = styled(props => <BackgroundImage {...props} />)`
+  height: 100vh;
+  display: grid;
+  user-select: none;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header" "sidebar";
+  background-color: #aaa;
+  // OPT 1
+  background-size: auto 100%;
+  background-repeat: repeat;
+`
+
+const Header = styled.header`
+  grid-area: header;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  /* Black box
+   padding-bottom: 1rem;
+   background-color: #111;
+   width: fit-content; */
+  h1 {
+    margin: 0;
+    margin: 0 1rem;
+    margin-top: 1rem;
+    width: auto;
+    color: ${props => props.theme.colors.surface};
+    font-size: ${props => props.theme.fontSizes.large};
+    display: inline-block;
+    /* border-bottom: ${props => `5px solid ${props.theme.colors.primary}`}; */
+  }
+`
+const Nav = styled.nav`
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-right: 1rem;
+`
+
+const NavItem = styled.li`
+  list-style-type: none;
+  * {
+    font-size: ${props => props.theme.fontSizes.small};
+    color: ${props => props.theme.colors.surface};
+    transition: color 0.25s ease-in-out;
+    position: relative;
+    text-decoration: none;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: ${props => props.theme.colors.primary};
+      transform: scale(0);
+      transition: transform 0.25s;
+    }
+    &:hover {
+      color: ${props => props.theme.colors.surface};
+      &::after {
+        transform: scale(1);
+      }
+    }
   }
 `
