@@ -12,7 +12,7 @@ import {
   ImageContainer,
   Image,
   MyModal,
-} from "./albumStyles"
+} from "../templates/albumStyles"
 
 Modal.setAppElement("#___gatsby")
 class Album extends Component {
@@ -112,25 +112,23 @@ class Album extends Component {
   }
 }
 
-export default Album
-
 export const query = graphql`
-  query($slug: String!, $relativeDirectory: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+  query {
+    markdownRemark(fields: { slug: { eq: "albums/black-and-white" } }) {
       frontmatter {
         title
       }
     }
     allFile(
       filter: {
-        relativeDirectory: { eq: $relativeDirectory }
+        relativeDirectory: { eq: "black-and-white" }
         ext: { ne: ".md" }
       }
     ) {
       edges {
         node {
           childImageSharp {
-            fluid(quality: 100) {
+            fluid {
               ...GatsbyImageSharpFluid
             }
           }
@@ -139,3 +137,5 @@ export const query = graphql`
     }
   }
 `
+
+export default Album

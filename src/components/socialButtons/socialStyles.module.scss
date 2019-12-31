@@ -1,0 +1,27 @@
+@mixin social-color($color) {
+  &::before {
+    background-color: $color; //#3b5998;
+  }
+
+  & > * {
+    color: $color; //#3b5998;
+  }
+
+  & > *:before {
+    background-color: $color; //#3b5998;
+  }
+}
+
+// .facebook {
+//   @include social-color(#3b5998);
+// }
+
+.instagram {
+  @include social-color(#e1306c);
+}
+.pinterest {
+  @include social-color(#bd081c);
+}
+.at {
+  @include social-color(#000);
+}

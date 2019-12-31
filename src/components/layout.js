@@ -13,16 +13,8 @@ const Layout = ({ children, title }) => {
         <NavbarContainer />
         <Main>{children}</Main>
         <Footer>
-          © {new Date().getFullYear()}, Built with
-          <a
-            href="https://www.gatsbyjs.org"
-            style={{
-              marginLeft: "0.25rem",
-              color: "#ffc14e",
-            }}
-          >
-            Gatsby
-          </a>
+          © {new Date().getFullYear()}{" "}
+          <span style={{ marginLeft: "0.5rem" }}>Itati Tapia</span>
         </Footer>
       </Container>
     </>
@@ -73,7 +65,7 @@ const Footer = styled.footer`
   background-color: #2d3436;
   display: flex;
   justify-content: center;
-  color: white;
+  color: #fff;
   font-size: 1.2rem;
 `
 

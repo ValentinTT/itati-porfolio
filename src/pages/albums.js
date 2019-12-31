@@ -16,7 +16,7 @@ const AlbumsPage = ({ data }) => {
       ...obj,
     }
   })
-
+  console.log(allCovers)
   return (
     <Layout title="Albums">
       <AlbumsContainer>
@@ -39,10 +39,9 @@ const AlbumsContainer = styled.div`
   justify-content: center;
 `
 const Album = styled.div`
-  background-color: #fff;
+  background-color: transparent;
   width: 300px;
   margin: 1rem;
-  max-height: 300px;
   overflow: hidden;
   border-radius: 5%;
   position: relative;
@@ -63,7 +62,7 @@ const Album = styled.div`
 `
 
 const AlbumCover = styled(props => <Img {...props} />)`
-  width: 300px;
+  height: 300px;
   transition: opacity 0.25s;
   transition: transform 1s ease-in-out;
 `
@@ -73,7 +72,6 @@ const AlbumTitle = styled.p`
   bottom: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
   background-color: #222;
   color: white;
   text-align: center;
@@ -92,7 +90,7 @@ export const query = graphql`
         node {
           relativeDirectory
           childImageSharp {
-            fluid(maxWidth: 500) {
+            fluid {
               ...GatsbyImageSharpFluid
             }
           }

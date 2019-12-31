@@ -115,6 +115,7 @@ const NavLinks = styled(animated.ul)`
   }
   .active {
     color: #fdcb6e;
+    border-bottom: 1px solid #fdcb6e;
   }
 `
 

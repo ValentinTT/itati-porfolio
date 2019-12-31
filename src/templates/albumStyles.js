@@ -3,6 +3,14 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 import Modal from "react-modal"
 
+export const ModalImage = styled(props => <Img {...props} />)`
+  width: 90vw;
+  max-width: 600px;
+  transition: all 0.25s linear;
+  &:hover {
+    opacity: 0.9;
+  }
+`
 export const AlbumTitle = styled.h1`
   text-align: center;
   font-size: 4rem;
@@ -16,10 +24,9 @@ export const AlbumHeader = styled.div`
   margin-bottom: 2rem;
 `
 export const HeaderImage = styled(props => <Img {...props} />)`
-  width: 100%;
+  width: 90vw;
   max-width: 600px;
   transition: all 0.25s linear;
-  border-radius: 5%;
   &:hover {
     opacity: 0.9;
   }
@@ -65,4 +72,5 @@ export const MyModal = styled(props => <Modal {...props} />)`
   justify-content: center;
   align-items: center;
   background-color: #111111a0;
+  position: relative;
 `
