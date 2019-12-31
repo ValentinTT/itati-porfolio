@@ -1,25 +1,43 @@
 import React from "react"
+import Img from "gatsby-image"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInstagram } from "@fortawesome/free-brands-svg-icons"
 import SocialStyles from "./socialStyles.module.scss"
 import Title from "../Title"
+import { useStaticQuery, graphql } from "gatsby"
 
-const SocialNetworks = () => (
-  <Container>
-    <Title>Follow me on Instagram</Title>
-    <ButtonsContainer>
-      <SocialButton
-        href="https://www.instagram.com/itati_tapia/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={SocialStyles.instagram}
-      >
-        <FontAwesomeIcon icon={faInstagram} />
-      </SocialButton>
-    </ButtonsContainer>
-  </Container>
-)
+const SocialNetworks = () => {
+  const img = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "contact.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 800) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `).file.childImageSharp
+  return (
+    <Container>
+      <Title>Follow me on Instagram</Title>
+      <ImageContainer>
+        <Img fluid={img.fluid} />
+      </ImageContainer>
+      <ButtonsContainer>
+        <SocialButton
+          href="https://www.instagram.com/itati_tapia/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={SocialStyles.instagram}
+        >
+          <FontAwesomeIcon icon={faInstagram} />
+        </SocialButton>
+      </ButtonsContainer>
+    </Container>
+  )
+}
 
 export default SocialNetworks
 
@@ -31,7 +49,13 @@ const Container = styled.div`
   background: ${props => props.theme.colors.surface};
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  margin: ${props => "0 " + props.theme.spacing.medium};
+  /* margin: ${props => "0 " + props.theme.spacing.medium}; */
+`
+
+const ImageContainer = styled.div`
+  width: 100%;
+  padding: ${props => props.theme.spacing.small};
+  object-fit: cover;
 `
 
 const ButtonsContainer = styled.div`

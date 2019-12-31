@@ -4,11 +4,16 @@ import Title from "./Title"
 
 const Form = () => (
   <FormContainer>
-    <MyForm action="post">
+    <MyForm
+      method="post"
+      name="contact-form"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+    >
       <Title>Send me an email</Title>
-      <Input type="text" placeholder="Your name" />
-      <Input type="email" placeholder="email@address.com" />
-      <MessageInput placeholder="Your message..."></MessageInput>
+      <Input name="name" type="text" placeholder="Your name" />
+      <Input name="email" type="email" placeholder="email@address.com" />
+      <MessageInput name="message" placeholder="Your message..."></MessageInput>
       <Row>
         <FormButton>Sumbit</FormButton>
       </Row>
@@ -20,12 +25,11 @@ export default Form
 
 const FormContainer = styled.div`
   grid-area: form;
-  width: 100%;
   height: fit-content;
   background: ${props => props.theme.colors.surface};
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  margin: ${props => "0 " + props.theme.spacing.medium};
+  /* margin: ${props => "0 " + props.theme.spacing.medium}; */
 `
 const MyForm = styled.form`
   width: 100%;

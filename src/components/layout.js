@@ -44,6 +44,25 @@ body {
 div[role="group"][tabindex] {
    height: 100%;
 }
+
+h1::selection {
+  background: ${props => props.theme.colors.primary};
+}
+h1::-moz-selection {
+  background: ${props => props.theme.colors.primary};
+}
+a::selection {
+  background: ${props => props.theme.colors.primary};
+}
+a::-moz-selection {
+  background: ${props => props.theme.colors.primary};
+}
+*::selection {
+  background: ${props => props.theme.colors.primary};
+}
+*::-moz-selection {
+  background: ${props => props.theme.colors.primary};
+}
 `
 
 const Container = styled.div`

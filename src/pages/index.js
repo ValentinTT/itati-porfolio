@@ -44,7 +44,7 @@ const IndexPage = () => {
               <Header>
                 {data.site.siteMetadata.title.split(" ").map(T => (
                   <>
-                    <h1>{T}</h1>
+                    <h1>{T.toUpperCase()}</h1>
                     <br />
                   </>
                 ))}
@@ -71,6 +71,9 @@ export default IndexPage
 const GlobalStyle = createGlobalStyle`
   html {
     overflow: hidden;
+  }
+  h1 {
+    font-weight: 100;
   }
 `
 const Background = styled(props => <BackgroundImage {...props} />)`
@@ -101,6 +104,7 @@ const Header = styled.header`
     width: auto;
     color: ${props => props.theme.colors.surface};
     font-size: ${props => props.theme.fontSizes.large};
+    font-weight: 900;
     display: inline-block;
     /* border-bottom: ${props => `5px solid ${props.theme.colors.primary}`}; */
   }
@@ -116,7 +120,8 @@ const Nav = styled.nav`
 const NavItem = styled.li`
   list-style-type: none;
   * {
-    font-size: ${props => props.theme.fontSizes.small};
+    /* font-size: ${props => props.theme.fontSizes.medium}; */
+    font-size: 1.25rem;
     color: ${props => props.theme.colors.surface};
     transition: color 0.25s ease-in-out;
     position: relative;

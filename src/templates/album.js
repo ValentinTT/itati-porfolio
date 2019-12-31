@@ -5,9 +5,9 @@ import Modal from "react-modal"
 import Layout from "../components/layout"
 import {
   ModalImage,
+  ModalOverlay,
+  ModalBackground,
   AlbumTitle,
-  AlbumHeader,
-  HeaderImage,
   AlbumContainer,
   ImageContainer,
   Image,
@@ -38,7 +38,6 @@ class Album extends Component {
 
   render() {
     const data = this.props.data
-    console.log("Props: ", data)
     const title = data.markdownRemark.frontmatter.title
     return (
       <Layout title={title}>
@@ -50,29 +49,8 @@ class Album extends Component {
         >
           {/* The <div> element is used as a way to get out of the modal */}
           {/* eslint-disable-next-line*/}
-          <div
-            style={{
-              position: "absolute",
-              width: "100vw",
-              height: "100vh",
-              background: "transparent",
-            }}
-            onClick={this.closeModal}
-          ></div>
-          <div
-            style={{
-              position: "fixed" /* or absolute */,
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              padding: "2rem",
-              background: "transparent",
-              color: "white",
-              zIndex: "100",
-            }}
-          >
-            Click image to open on a new tab
-          </div>
+          <ModalBackground onClick={this.closeModal}></ModalBackground>
+          <ModalOverlay>Click image to open on a new tab</ModalOverlay>
           <a
             href={this.state.fluid.src}
             rel="noopener noreferrer"
@@ -86,7 +64,7 @@ class Album extends Component {
           </a>
         </MyModal>
         <AlbumTitle>{title}</AlbumTitle>
-        <AlbumHeader
+        {/* <AlbumHeader
           onClick={() =>
             this.openModal(data.allFile.edges[0].node.childImageSharp.fluid)
           }
@@ -95,10 +73,9 @@ class Album extends Component {
           <HeaderImage
             fluid={data.allFile.edges[0].node.childImageSharp.fluid}
           />
-        </AlbumHeader>
+        </AlbumHeader> */}
         <AlbumContainer>
-          {/* <ImgHeader></ImgHeader> */}
-          {data.allFile.edges.slice(1).map((img, i) => (
+          {data.allFile.edges.map((img, i) => (
             <ImageContainer
               key={i}
               onClick={() => this.openModal(img.node.childImageSharp.fluid)}

@@ -37,7 +37,7 @@ const Navbar = props => {
     <>
       <NavBar style={barAnimation}>
         <FlexContainer>
-          <NavTitle>{data.site.siteMetadata.title}</NavTitle>
+          <NavTitle>{data.site.siteMetadata.title.toUpperCase()}</NavTitle>
           <NavLinks style={linkAnimation}>
             {data.site.siteMetadata.menuLinks.map(L => (
               <Link to={L.link} key={L.name} activeClassName="active">

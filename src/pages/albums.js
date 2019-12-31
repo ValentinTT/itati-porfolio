@@ -45,7 +45,7 @@ const Album = styled.div`
   overflow: hidden;
   /* border-radius: 5%; */
   position: relative;
-  box-shadow: 0px 10px 32px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   &:hover > a {
     & > p {
