@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Itati Tapia`,
-    description: `This is a porfolio where I will upload some of my best albums, plus some information about me, so you can get to know me better.`,
+    description: `This is a porfolio where I upload some of my best albums, plus some information about me, so you can get to know me better.`,
     author: `@gatsbyjs`,
     menuLinks: [
       {
@@ -46,8 +46,8 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#06B49A`,
+        theme_color: `#06B49A`,
         display: `minimal-ui`,
       },
     },

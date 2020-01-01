@@ -4,13 +4,14 @@ import Title from "./Title"
 
 const Form = () => (
   <FormContainer>
+    <Title>Send me an email</Title>
     <MyForm
-      method="post"
+      method="POST"
       name="contact-form"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
     >
-      <Title>Send me an email</Title>
+      <input type="hidden" name="form-name" value="contact-form" />
       <Input name="name" type="text" placeholder="Your name" />
       <Input name="email" type="email" placeholder="email@address.com" />
       <MessageInput name="message" placeholder="Your message..."></MessageInput>
@@ -24,6 +25,7 @@ const Form = () => (
 export default Form
 
 const FormContainer = styled.div`
+  padding-top: 1rem;
   grid-area: form;
   height: fit-content;
   background: ${props => props.theme.colors.surface};
