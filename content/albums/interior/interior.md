@@ -1,0 +1,4 @@
+---
+url: interior
+title: Interior
+---

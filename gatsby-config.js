@@ -38,6 +38,13 @@ module.exports = {
         path: `${__dirname}/content/albums`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `collections`,
+        path: `${__dirname}/content/collections`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

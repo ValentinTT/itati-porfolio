@@ -16,7 +16,6 @@ const AlbumsPage = ({ data }) => {
       ...obj,
     }
   })
-  console.log(allCovers)
   return (
     <Layout title="Albums">
       <AlbumsContainer>

@@ -13,9 +13,10 @@ import {
   Image,
   MyModal,
 } from "../templates/albumStyles"
+import styled from "styled-components"
 
 Modal.setAppElement("#___gatsby")
-class Album extends Component {
+class Collection extends Component {
   constructor() {
     super()
 
@@ -36,12 +37,25 @@ class Album extends Component {
     this.setState({ modalIsOpen: false })
   }
 
+  splitCollections = data => {
+    let collections = [[data[0].node]]
+    let index = 0
+    let prev = data[0].node.relativeDirectory
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].node.relativeDirectory !== prev) {
+        collections.push([data[i].node])
+        index++
+        prev = data[i].node.relativeDirectory
+      } else collections[index].push(data[i].node)
+    }
+    return collections
+  }
+
   render() {
-    const data = this.props.data
-    console.log("Props: ", data)
-    const title = data.markdownRemark.frontmatter.title
+    const data = this.props.data.allFile.edges
+    const collections = this.splitCollections(data)
     return (
-      <Layout title={title}>
+      <Layout title={"Collections"}>
         <MyModal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -64,46 +78,40 @@ class Album extends Component {
             <ModalImage fluid={this.state.fluid}></ModalImage>
           </a>
         </MyModal>
-        <AlbumTitle>{title}</AlbumTitle>
-        {/* <AlbumHeader
-          onClick={() =>
-            this.openModal(data.allFile.edges[0].node.childImageSharp.fluid)
-          }
-        >
-          {console.log(data.allFile.edges[0].node.childImageSharp.fluid)}
-          <HeaderImage
-            fluid={data.allFile.edges[0].node.childImageSharp.fluid}
-          />
-        </AlbumHeader> */}
-        <AlbumContainer>
-          {data.allFile.edges.map((img, i) => (
-            <ImageContainer
-              key={i}
-              onClick={() => this.openModal(img.node.childImageSharp.fluid)}
-            >
-              <Image fluid={img.node.childImageSharp.fluid} />
-            </ImageContainer>
-          ))}
-        </AlbumContainer>
+        {collections.map((collection, index) => (
+          <CollectionContainer key={index}>
+            <AlbumTitle>{collection[0].relativeDirectory}</AlbumTitle>
+            <AlbumContainer>
+              {collection.map((img, i) => (
+                <ImageContainer
+                  key={i}
+                  onClick={() => this.openModal(img.childImageSharp.fluid)}
+                >
+                  <Image fluid={img.childImageSharp.fluid} />
+                </ImageContainer>
+              ))}
+            </AlbumContainer>
+          </CollectionContainer>
+        ))}
       </Layout>
     )
   }
 }
+
+const CollectionContainer = styled.div`
+  margin-bottom: ${props => props.theme.spacing.large};
+`
+
 export const query = graphql`
   query {
-    markdownRemark(fields: { slug: { eq: "albums/black-and-white" } }) {
-      frontmatter {
-        title
-      }
-    }
     allFile(
-      filter: {
-        relativeDirectory: { eq: "black-and-white" }
-        ext: { ne: ".md" }
-      }
+      filter: { sourceInstanceName: { eq: "collections" } }
+      sort: { fields: relativeDirectory }
     ) {
       edges {
         node {
+          name
+          relativeDirectory
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid
@@ -114,5 +122,4 @@ export const query = graphql`
     }
   }
 `
-
-export default Album
+export default Collection

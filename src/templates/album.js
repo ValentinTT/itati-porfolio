@@ -38,9 +38,14 @@ class Album extends Component {
 
   render() {
     const data = this.props.data
-    const title = data.markdownRemark.frontmatter.title
+    const index = data.allFile.edges.findIndex(n => n.node.name === "cover")
+    const files = [
+      data.allFile.edges[index],
+      ...data.allFile.edges.slice(0, index),
+      ...data.allFile.edges.slice(index + 1),
+    ]
     return (
-      <Layout title={title}>
+      <Layout title={data.markdownRemark.frontmatter.title}>
         <MyModal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -63,19 +68,9 @@ class Album extends Component {
             <ModalImage fluid={this.state.fluid}></ModalImage>
           </a>
         </MyModal>
-        <AlbumTitle>{title}</AlbumTitle>
-        {/* <AlbumHeader
-          onClick={() =>
-            this.openModal(data.allFile.edges[0].node.childImageSharp.fluid)
-          }
-        >
-          {console.log(data.allFile.edges[0].node.childImageSharp.fluid)}
-          <HeaderImage
-            fluid={data.allFile.edges[0].node.childImageSharp.fluid}
-          />
-        </AlbumHeader> */}
+        <AlbumTitle>{data.markdownRemark.frontmatter.title}</AlbumTitle>
         <AlbumContainer>
-          {data.allFile.edges.map((img, i) => (
+          {files.map((img, i) => (
             <ImageContainer
               key={i}
               onClick={() => this.openModal(img.node.childImageSharp.fluid)}
@@ -111,6 +106,7 @@ export const query = graphql`
               ...GatsbyImageSharpFluid
             }
           }
+          name
         }
       }
     }
